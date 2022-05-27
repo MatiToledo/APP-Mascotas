@@ -22,8 +22,8 @@ export default function HomeScreen(props) {
   }
 
   function deleteUbication() {
-    dispatch(loadUbication());
-    // dispatch(removeUbication());
+    // dispatch(loadUbication());
+    dispatch(removeUbication());
     setUbication(!ubication);
   }
 

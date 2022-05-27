@@ -107,6 +107,7 @@ export async function deletePetReport(data, token) {
   });
 
   const res = await call.json();
+  return res;
 
   if (res == true) {
     window.alert("Exito al eliminar el reporte de la mascota");

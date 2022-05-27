@@ -1,8 +1,25 @@
-import { Animated, Image, StyleSheet, Text, View } from "react-native";
+import {
+  Animated,
+  Image,
+  Pressable,
+  StyleSheet,
+  Text,
+  View,
+} from "react-native";
 import { React } from "react";
+import { deletePetReport } from "../lib/api";
 
 export default function MyCardPet(props) {
-  const { petName, petPhoto } = props;
+  const { petName, petPhoto, petId } = props;
+
+  async function handleDelete() {
+    const deletePet = await deletePetReport(
+      { id: props.petId },
+      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjUzNjYzMDUzfQ.2F_SZk-dAkK8iCyCKW4vmfx2dmmTT2BazvDuzr8L1rs"
+    );
+    console.log(deletePet);
+  }
+
   return (
     <View style={styles.container}>
       <Image
@@ -15,9 +32,11 @@ export default function MyCardPet(props) {
         <Text style={styles.name}>{petName}</Text>
       </View>
       <View style={styles.report}>
-        <Text style={styles.edit}> Editar </Text>
-        <View style={styles.barra}></View>
-        <Text style={styles.delete}> Eliminar </Text>
+        {/* <Text style={styles.edit}> Editar </Text>
+        <View style={styles.barra}></View> */}
+        <Pressable onPress={handleDelete}>
+          <Text style={styles.delete}>Eliminar</Text>
+        </Pressable>
       </View>
     </View>
   );

@@ -1,26 +1,13 @@
-import { React } from "react";
+import { React, useEffect, useState } from "react";
 import { StyleSheet, Text, FlatList, View, Image } from "react-native";
-import { useSelector } from "react-redux";
-import { PETS } from "../data/pets";
+import { useDispatch, useSelector } from "react-redux";
+import { userPets } from "../store/actions/user.action";
 import MyButton from "../ui/Button";
 import MyCardPet from "./MyCardPet";
 
 export default function MyPetsComp(props) {
+  console.log(props);
   const token = useSelector((state) => state.auth.token);
-  console.log("MY PETS TOKEN", token);
-
-  // function handleLogIn() {
-  //   props.navigation.navigate("Log In");
-  // }
-
-  // if (!token) {
-  //   return (
-  //     <View>
-  //       <Text>Debes iniciar sesion para ver tus mascotas!</Text>
-  //       <MyButton title="Iniciar Sesion" onPress={handleLogIn}></MyButton>
-  //     </View>
-  //   );
-  // }
 
   function handleReport() {
     props.navigation.navigate("Report");
@@ -30,9 +17,8 @@ export default function MyPetsComp(props) {
     return (
       <MyCardPet
         petName={i.item.petName}
-        petDescription={i.item.petDescription}
-        petUbication={i.item.petUbication}
         petPhoto={i.item.petPhoto}
+        petId={i.item.id}
       ></MyCardPet>
     );
   }
@@ -40,11 +26,16 @@ export default function MyPetsComp(props) {
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Mis mascotas reportadas</Text>
-      <FlatList
-        data={PETS}
-        renderItem={renderCardsPet}
-        keyExtractor={(pet) => pet.petId}
-      />
+      {pets.length !== 0 ? (
+        <FlatList
+          data={props.pets}
+          renderItem={renderCardsPet}
+          keyExtractor={(pet) => pet.id}
+        />
+      ) : (
+        <Text>No tienes mascotas reportadas</Text>
+      )}
+
       <View style={styles.ubication}>
         <MyButton title={"Reportar mascota"} onPress={handleReport}></MyButton>
       </View>
