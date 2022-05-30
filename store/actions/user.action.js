@@ -15,7 +15,6 @@ export const addUbication = (data) => {
   return async (dispatch) => {
     try {
       const result = await insertUserLocation(lat, lng);
-      console.log("ADD", result);
       dispatch({ type: ADD_UBICATION, coords: data });
     } catch (error) {
       throw error;
@@ -27,7 +26,6 @@ export const removeUbication = () => {
   return async (dispatch) => {
     try {
       const result = await deleteUserLocation();
-      console.log(result);
       dispatch({ type: REMOVE_UBICATION });
     } catch (error) {
       throw error;
@@ -39,19 +37,16 @@ export const loadUbication = () => {
   return async (dispatch) => {
     try {
       const result = await fetchUserLocation();
-      console.log("UPLOAD", result);
       // dispatch({ type: LOAD_UBICATION, coords: data });
     } catch (error) {
       throw error;
     }
   };
 };
-export const userPets = () => {
+export const userPets = (token) => {
   return async (dispatch) => {
     try {
-      const pets = await myPets(
-        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjUzNjYzMDUzfQ.2F_SZk-dAkK8iCyCKW4vmfx2dmmTT2BazvDuzr8L1rs"
-      );
+      const pets = await myPets(token);
       dispatch({ type: USER_PETS, data: pets });
     } catch (error) {
       throw error;

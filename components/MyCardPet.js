@@ -17,7 +17,6 @@ export default function MyCardPet(props) {
       { id: props.petId },
       "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjUzNjYzMDUzfQ.2F_SZk-dAkK8iCyCKW4vmfx2dmmTT2BazvDuzr8L1rs"
     );
-    console.log(deletePet);
   }
 
   return (

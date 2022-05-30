@@ -8,33 +8,26 @@ import {
   Dimensions,
 } from "react-native";
 import { checkEmail, authToken } from "../lib/api";
-import { useSelector, useDispatch } from "react-redux";
-
+import { useDispatch } from "react-redux";
 import MyButton from "../ui/Button";
-import { logIn } from "../store/actions/auth.action";
+import { authAction } from "../store/actions/auth.action";
 
 export default function LogIn(props) {
   const dispatch = useDispatch();
   const navigation = props.navigation;
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const authSelector = useSelector((state) => state.auth);
 
   async function handleOnPress() {
     const exist = await checkEmail(email);
     if (exist) {
       const auth = await authToken({ email, password });
       if (auth.token) {
-        dispatch(
-          logIn({
-            userName: auth.user.userName,
-            email: auth.user.email,
-            token: auth.token,
-          })
-        );
+        dispatch(authAction(auth.user.userName, auth.token, auth.user.email));
         navigation.navigate("Home");
         Alert.alert("Inicio de sesion realizado con exito");
       } else {
+        setPassword("");
         Alert.alert("Contraseña o email incorrecto");
       }
     } else {
@@ -51,6 +44,7 @@ export default function LogIn(props) {
   function handleLogUp() {
     navigation.navigate("Log Up");
   }
+
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Ingresar</Text>

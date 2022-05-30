@@ -9,25 +9,35 @@ const Stack = createNativeStackNavigator();
 
 function LogInNavigator() {
   const token = useSelector((state) => state.auth.token);
-  console.log(token);
 
-  return (
+  const auth = (
     <Stack.Navigator
       initialRouteName="Log"
       screenOptions={{
         headerShown: false,
       }}
     >
-      {token ? (
-        <Stack.Screen name="My Data" component={MyDataScreen}></Stack.Screen>
-      ) : (
-        ((<Stack.Screen name="Log Up" component={LogUpScreen}></Stack.Screen>),
-        (<Stack.Screen name="Log In" component={LogInScreen}></Stack.Screen>))
-      )}
-      {/* <Stack.Screen name="Log In" component={LogInScreen}></Stack.Screen>
-      <Stack.Screen name="Log Up" component={LogUpScreen}></Stack.Screen> */}
+      <Stack.Screen name="My Data" component={MyDataScreen}></Stack.Screen>
     </Stack.Navigator>
   );
+
+  const noAuth = (
+    <Stack.Navigator
+      initialRouteName="Log"
+      screenOptions={{
+        headerShown: false,
+      }}
+    >
+      <Stack.Screen name="Log In" component={LogInScreen}></Stack.Screen>
+      <Stack.Screen name="Log Up" component={LogUpScreen}></Stack.Screen>
+    </Stack.Navigator>
+  );
+
+  if (token) {
+    return auth;
+  } else {
+    return noAuth;
+  }
 }
 
 export default LogInNavigator;

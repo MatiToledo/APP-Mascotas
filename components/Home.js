@@ -1,16 +1,20 @@
 import { StyleSheet, Text, View, Alert } from "react-native";
 import MyButton from "../ui/Button";
 import colors from "../constants/colors";
-import { React, useState } from "react";
+import React, { useEffect } from "react";
 import * as Location from "expo-location";
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 import { addUbication } from "../store/actions/user.action";
 import { petsAround } from "../lib/api";
+import { loadAuth } from "../store/actions/auth.action";
 
 export default function Home(props) {
-  const userSelector = useSelector((state) => state.user);
-
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(loadAuth());
+  }, []);
+
   async function verifyPermissions() {
     let { status } = await Location.requestForegroundPermissionsAsync();
     if (status !== "granted") {
@@ -56,6 +60,7 @@ export default function Home(props) {
         conocer tu ubicación.
       </Text>
       <MyButton
+        variant="loader"
         title={"Dar mi ubicación"}
         onPress={handlerPress.bind()}
       ></MyButton>

@@ -1,5 +1,3 @@
-import { AUTH } from "../../data/auth";
-
 const initialState = {
   userName: null,
   token: null,
@@ -8,11 +6,20 @@ const initialState = {
 
 export default function AuthReducer(state = initialState, action) {
   switch (action.type) {
-    case "LOG_IN":
-      state.email = action.authData.email;
-      state.token = action.authData.token;
-      state.userName = action.authData.userName;
-      return state;
+    case "AUTH":
+      return {
+        ...state,
+        token: action.data.token,
+        email: action.data.email,
+        userName: action.data.userName,
+      };
+    case "DELETE_AUTH":
+      return {
+        ...state,
+        token: null,
+        email: null,
+        userName: null,
+      };
     default:
       return state;
   }

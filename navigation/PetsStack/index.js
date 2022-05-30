@@ -5,16 +5,18 @@ import ReportPetScreen from "../../screens/ReportPet";
 
 const Stack = createNativeStackNavigator();
 
-const PetsNavigator = () => (
-  <Stack.Navigator
-    initialRouteName="Pets"
-    screenOptions={{
-      headerShown: false,
-    }}
-  >
-    <Stack.Screen name="Pets" component={MyPetsScreen}></Stack.Screen>
-    <Stack.Screen name="Report" component={ReportPetScreen}></Stack.Screen>
-  </Stack.Navigator>
-);
+function PetsNavigator() {
+  return (
+    <Stack.Navigator
+      initialRouteName="Pets"
+      screenOptions={{
+        headerShown: false,
+      }}
+    >
+      <Stack.Screen name="Pets" component={MyPetsScreen}></Stack.Screen>
+      <Stack.Screen name="Report" component={ReportPetScreen}></Stack.Screen>
+    </Stack.Navigator>
+  );
+}
 
 export default PetsNavigator;

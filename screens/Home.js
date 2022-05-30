@@ -7,6 +7,7 @@ import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { removeUbication, loadUbication } from "../store/actions/user.action";
 import { useState } from "react";
+import { loadAuth } from "../store/actions/auth.action";
 
 export default function HomeScreen(props) {
   const [pets, setPets] = useState([]);
@@ -22,7 +23,7 @@ export default function HomeScreen(props) {
   }
 
   function deleteUbication() {
-    // dispatch(loadUbication());
+    dispatch(loadAuth());
     dispatch(removeUbication());
     setUbication(!ubication);
   }

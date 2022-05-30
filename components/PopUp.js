@@ -31,7 +31,6 @@ export default function PopUp(props) {
     setSeenIn(t);
   }
   async function handleSubmit() {
-    console.log(pet);
     await infoAboutPet({
       petId: pet.petId,
       petName: pet.petName,

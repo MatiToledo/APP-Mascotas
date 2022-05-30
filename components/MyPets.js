@@ -1,13 +1,18 @@
 import { React, useEffect, useState } from "react";
-import { StyleSheet, Text, FlatList, View, Image } from "react-native";
+import { StyleSheet, Text, FlatList, View } from "react-native";
 import { useDispatch, useSelector } from "react-redux";
 import { userPets } from "../store/actions/user.action";
 import MyButton from "../ui/Button";
 import MyCardPet from "./MyCardPet";
 
 export default function MyPetsComp(props) {
-  console.log(props);
+  const dispatch = useDispatch();
+  const pets = useSelector((state) => state.user.userPets);
   const token = useSelector((state) => state.auth.token);
+
+  useEffect(() => {
+    dispatch(userPets(token));
+  }, []);
 
   function handleReport() {
     props.navigation.navigate("Report");
@@ -28,14 +33,13 @@ export default function MyPetsComp(props) {
       <Text style={styles.title}>Mis mascotas reportadas</Text>
       {pets.length !== 0 ? (
         <FlatList
-          data={props.pets}
+          data={pets}
           renderItem={renderCardsPet}
           keyExtractor={(pet) => pet.id}
         />
       ) : (
         <Text>No tienes mascotas reportadas</Text>
       )}
-
       <View style={styles.ubication}>
         <MyButton title={"Reportar mascota"} onPress={handleReport}></MyButton>
       </View>

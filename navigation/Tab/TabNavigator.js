@@ -12,7 +12,6 @@ const BottomTabs = createBottomTabNavigator();
 
 const TabNavigator = () => {
   const token = useSelector((state) => state.auth.token);
-  console.log("TAB NAVIGATOR", token);
 
   return (
     <BottomTabs.Navigator

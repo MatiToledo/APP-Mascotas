@@ -1,24 +1,39 @@
-import React, { useEffect } from "react";
-import { View } from "react-native";
+import React from "react";
+import { View, Text, StyleSheet, Dimensions } from "react-native";
 import MyPetsComp from "../components/MyPets";
-import { useDispatch, useSelector } from "react-redux";
-import { userPets } from "../store/actions/user.action";
+import { useSelector } from "react-redux";
 
 export default function MyPetsScreen(props) {
-  const dispatch = useDispatch();
+  const token = useSelector((state) => state.auth.token);
 
-  useEffect(() => {
-    dispatch(userPets());
-    console.log("useeffect");
-  }, []);
-
-  const pets = useSelector((state) => state.user.userPets);
-  console.log("useselector", pets);
   return (
     <View style={{ flex: 1 }}>
-      {/* {pets.length !== 0 ? (
-        <MyPetsComp navigation={props.navigation} pets={pets}></MyPetsComp>
-      ) : null} */}
+      {token ? (
+        <MyPetsComp navigation={props.navigation}></MyPetsComp>
+      ) : (
+        <View style={styles.container}>
+          <Text style={styles.title}>
+            Debes registarte para ver tus mascotas
+          </Text>
+        </View>
+      )}
     </View>
   );
 }
+
+const styles = StyleSheet.create({
+  container: {
+    height: Dimensions.get("window").height,
+    width: Dimensions.get("window").width,
+    justifyContent: "center",
+    alignItems: "center",
+    position: "absolute",
+  },
+  title: {
+    fontFamily: "InterRegular",
+    fontWeight: "700",
+    fontSize: 20,
+    textAlign: "center",
+    maxWidth: 340,
+  },
+});

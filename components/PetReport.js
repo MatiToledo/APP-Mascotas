@@ -38,9 +38,7 @@ export default function ReportPetComp(props) {
       petPhoto:
         "https://www.sam-manipulados.com/wp-content/uploads/2014/01/default_image_01.png",
     };
-    // console.log(data);
     const report = await createPetReport(data, token);
-    console.log(report);
   }
 
   return (

@@ -10,16 +10,26 @@ const initialState = {
 export default function UserReducer(state = initialState, action) {
   switch (action.type) {
     case "ADD_UBICATION":
-      state.userLocation.lat = action.coords.lat;
-      state.userLocation.lng = action.coords.lng;
-      return state;
+      return {
+        ...state,
+        userLocation: {
+          lat: action.coords.lat,
+          lng: action.coords.lng,
+        },
+      };
     case "REMOVE_UBICATION":
-      state.userLocation.lat = null;
-      state.userLocation.lng = null;
-      return state;
+      return {
+        ...state,
+        userLocation: {
+          lat: null,
+          lng: null,
+        },
+      };
     case "USER_PETS":
-      state.userPets = [1, 2];
-      return state;
+      return {
+        ...state,
+        userPets: action.data,
+      };
     default:
       return state;
   }

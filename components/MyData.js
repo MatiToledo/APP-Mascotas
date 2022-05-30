@@ -8,13 +8,14 @@ import {
   Dimensions,
 } from "react-native";
 import { useSelector, useDispatch } from "react-redux";
-import { auth, modifyData } from "../lib/api";
+import { modifyData } from "../lib/api";
 
 import MyButton from "../ui/Button";
+import { authAction, authDelete } from "../store/actions/auth.action";
 
 export default function MyData(props) {
   const auth = useSelector((state) => state.auth);
-
+  const dispatch = useDispatch();
   const [userName, setUserName] = useState(auth.userName);
   const [newEmail, setNewEmail] = useState(auth.email);
   const [password, setPassword] = useState("");
@@ -38,19 +39,25 @@ export default function MyData(props) {
         email: auth.email,
         newEmail,
         userName,
-        newEmail,
         password,
         confirmpassword,
       },
       auth.token
     );
     if (modificar !== false) {
+      dispatch(authAction(userName, auth.token, newEmail));
       Alert.alert("Información modificada con éxito");
       props.navigation.navigate("Home");
     } else {
+      setPassword(""), setConfirmpassword("");
       Alert.alert("Error al modificar la información");
     }
   }
+
+  function handleLogOut() {
+    dispatch(authDelete());
+  }
+
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Mis Datos</Text>
@@ -94,6 +101,13 @@ export default function MyData(props) {
           ></TextInput>
         </View>
         <MyButton onPress={handleOnPress} title="Modificar"></MyButton>
+      </View>
+      <View style={styles.logout}>
+        <MyButton
+          onPress={handleLogOut}
+          variant="loader"
+          title="Cerrar sesion"
+        ></MyButton>
       </View>
     </View>
   );
@@ -144,5 +158,9 @@ const styles = StyleSheet.create({
     color: "#485fc7",
     textAlign: "center",
     textDecorationLine: "underline",
+  },
+  logout: {
+    position: "absolute",
+    bottom: 60,
   },
 });

@@ -95,7 +95,11 @@ export default function LogUp(props) {
             onChangeText={handleConfirmPassword}
           ></TextInput>
         </View>
-        <MyButton onPress={handleOnPress} title="Registrarse"></MyButton>
+        <MyButton
+          onPress={handleOnPress}
+          variant="loader"
+          title="Registrarse"
+        ></MyButton>
       </View>
     </View>
   );

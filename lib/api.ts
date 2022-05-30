@@ -22,8 +22,6 @@ export async function checkEmail(email) {
 }
 
 export async function authToken(data) {
-  console.log("END", data);
-
   const call = await fetch(API_BASE_URL + "/auth/token", {
     method: "post",
     headers: {
@@ -57,8 +55,6 @@ export async function modifyData(data, token) {
 }
 
 export async function createPetReport(data, token) {
-  console.log(JSON.stringify(data));
-
   // try {
   //   const call = await fetch(API_BASE_URL + "/pets/report", {
   //     method: "POST",
@@ -70,13 +66,11 @@ export async function createPetReport(data, token) {
   //     },
   //     body: JSON.stringify(data),
   //   });
-
   //   const res = await call.text();
   //   return res;
   // } catch (error) {
   //   console.error(error);
   // }
-
   // if (res == true) {
   //   window.alert("Mascota reportada con exito");
   // } else {
