@@ -37,6 +37,7 @@ const TabNavigator = () => {
         name="TabPets"
         component={PetsNavigator}
         options={{
+          unmountOnBlur: true,
           tabBarIcon: ({ focused }) => (
             <View style={styles.item}>
               <Ionicons name="paw" size={24} color="black" />
@@ -48,6 +49,7 @@ const TabNavigator = () => {
         name="TabLogIn"
         component={LogInNavigator}
         options={{
+          unmountOnBlur: true,
           tabBarIcon: ({ focused }) => (
             <View style={styles.item}>
               <Ionicons name="person" size={24} color="black" />

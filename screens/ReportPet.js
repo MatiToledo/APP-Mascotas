@@ -5,7 +5,7 @@ import ReportPetComp from "../components/PetReport";
 export default function ReportPetScreen(props) {
   return (
     <View style={{ flex: 1 }}>
-      <ReportPetComp></ReportPetComp>
+      <ReportPetComp navigation={props.navigation}></ReportPetComp>
     </View>
   );
 }

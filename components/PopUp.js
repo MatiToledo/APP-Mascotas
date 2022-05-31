@@ -46,10 +46,17 @@ export default function PopUp(props) {
       reporterPhoneNumber,
     });
     if (notification == true) {
+      setReporterName("");
+      setReporterPhoneNumber("");
+      setSeenIn("");
       Alert.alert("reporte realizado con exito ");
       closeModal();
     } else {
+      setReporterName("");
+      setReporterPhoneNumber("");
+      setSeenIn("");
       Alert.alert("error al realizar el reporte");
+      closeModal();
     }
   }
 
@@ -101,6 +108,7 @@ export default function PopUp(props) {
               ></TextInput>
             </View>
             <MyButton
+              variant="loader"
               title="Enviar información"
               onPress={handleSubmit}
             ></MyButton>

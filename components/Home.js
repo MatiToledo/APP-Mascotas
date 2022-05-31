@@ -1,7 +1,7 @@
 import { StyleSheet, Text, View, Alert } from "react-native";
 import MyButton from "../ui/Button";
 import colors from "../constants/colors";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import * as Location from "expo-location";
 import { useDispatch } from "react-redux";
 import { addUbication } from "../store/actions/user.action";
@@ -9,6 +9,7 @@ import { petsAround } from "../lib/api";
 import { loadAuth } from "../store/actions/auth.action";
 
 export default function Home(props) {
+  const [loader, setLoader] = useState("loader");
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -29,6 +30,7 @@ export default function Home(props) {
   }
 
   async function handlerPress() {
+    setLoader("loader");
     const isLocationOk = await verifyPermissions();
     if (!isLocationOk) return;
 
@@ -46,6 +48,7 @@ export default function Home(props) {
       location.coords.longitude
     );
     if (petsFound.length == 0) {
+      setLoader("");
       Alert.alert("No hay mascotas perdidas cerca tuyo");
     } else {
       props.getPets(petsFound);
@@ -60,7 +63,7 @@ export default function Home(props) {
         conocer tu ubicación.
       </Text>
       <MyButton
-        variant="loader"
+        variant={loader}
         title={"Dar mi ubicación"}
         onPress={handlerPress.bind()}
       ></MyButton>

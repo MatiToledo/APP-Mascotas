@@ -1,22 +1,15 @@
-import {
-  Animated,
-  Image,
-  Pressable,
-  StyleSheet,
-  Text,
-  View,
-} from "react-native";
+import { Image, Pressable, StyleSheet, Text, View } from "react-native";
 import { React } from "react";
 import { deletePetReport } from "../lib/api";
+import { useSelector } from "react-redux";
 
 export default function MyCardPet(props) {
-  const { petName, petPhoto, petId } = props;
+  const { petName, petPhoto, petId, navigation } = props;
+  const token = useSelector((state) => state.auth.token);
 
   async function handleDelete() {
-    const deletePet = await deletePetReport(
-      { id: props.petId },
-      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjUzNjYzMDUzfQ.2F_SZk-dAkK8iCyCKW4vmfx2dmmTT2BazvDuzr8L1rs"
-    );
+    const deletePet = await deletePetReport({ id: petId }, token);
+    navigation.navigate("Home");
   }
 
   return (

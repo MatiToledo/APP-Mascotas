@@ -1,12 +1,21 @@
-import { StyleSheet, Text, View, ScrollView, TextInput } from "react-native";
+import {
+  StyleSheet,
+  Text,
+  View,
+  ScrollView,
+  TextInput,
+  Alert,
+} from "react-native";
 import MyButton from "../ui/Button";
-import { React, useEffect, useState } from "react";
+import { React, useState } from "react";
 import ImageSelector from "./ImageSelector";
 import Maps from "./Maps";
 import { useSelector } from "react-redux";
 import { createPetReport } from "../lib/api";
 
 export default function ReportPetComp(props) {
+  console.log(props);
+  const navigation = props.navigation;
   const auth = useSelector((state) => state.auth);
   const [petName, setPetName] = useState("");
   const [petDescription, setPetDescription] = useState("");
@@ -35,10 +44,16 @@ export default function ReportPetComp(props) {
       petUbication: geoData ? geoData.petUbication : null,
       lastlocationLat: geoData ? geoData.lastlocationLat : null,
       lastlocationLng: geoData ? geoData.lastlocationLng : null,
-      petPhoto:
-        "https://www.sam-manipulados.com/wp-content/uploads/2014/01/default_image_01.png",
+      petPhoto,
     };
     const report = await createPetReport(data, token);
+    if (report == true) {
+      navigation.navigate("Home");
+      Alert.alert("Mascota reportada con exito");
+    } else {
+      navigation.navigate("Home");
+      Alert.alert("No se pudo reportar la mascota");
+    }
   }
 
   return (
@@ -69,7 +84,11 @@ export default function ReportPetComp(props) {
         </View>
         <ImageSelector handleImage={handleImage}></ImageSelector>
         <Maps handleGeoData={handleGeoData}></Maps>
-        <MyButton title="Reportar Mascota" onPress={handleReport}></MyButton>
+        <MyButton
+          title="Reportar Mascota"
+          variant="loader"
+          onPress={handleReport}
+        ></MyButton>
       </ScrollView>
     </View>
   );

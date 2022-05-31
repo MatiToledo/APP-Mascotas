@@ -29,7 +29,8 @@ export default function ImageSelector(props) {
 
     if (result.base64) {
       setImage(result.uri);
-      props.handleImage(result.base64);
+      const base64 = `data:image/png;base64,${result.base64}`;
+      props.handleImage(base64);
     } else {
       Alert.alert("No se pudo cargar la imagen");
     }

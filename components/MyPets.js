@@ -6,6 +6,8 @@ import MyButton from "../ui/Button";
 import MyCardPet from "./MyCardPet";
 
 export default function MyPetsComp(props) {
+  const navigation = props.navigation;
+
   const dispatch = useDispatch();
   const pets = useSelector((state) => state.user.userPets);
   const token = useSelector((state) => state.auth.token);
@@ -15,7 +17,7 @@ export default function MyPetsComp(props) {
   }, []);
 
   function handleReport() {
-    props.navigation.navigate("Report");
+    navigation.navigate("Report");
   }
 
   function renderCardsPet(i) {
@@ -24,6 +26,7 @@ export default function MyPetsComp(props) {
         petName={i.item.petName}
         petPhoto={i.item.petPhoto}
         petId={i.item.id}
+        navigation={navigation}
       ></MyCardPet>
     );
   }
@@ -38,7 +41,7 @@ export default function MyPetsComp(props) {
           keyExtractor={(pet) => pet.id}
         />
       ) : (
-        <Text>No tienes mascotas reportadas</Text>
+        <Text style={styles.nopets}>No tienes mascotas reportadas</Text>
       )}
       <View style={styles.ubication}>
         <MyButton title={"Reportar mascota"} onPress={handleReport}></MyButton>
@@ -58,8 +61,18 @@ const styles = StyleSheet.create({
     fontSize: 27,
     textAlign: "center",
     margin: 12,
+    marginTop: 30,
   },
   ubication: {
     marginVertical: 15,
+  },
+  nopets: {
+    flex: 1,
+    textAlignVertical: "center",
+    fontFamily: "InterRegular",
+    fontWeight: "400",
+    fontSize: 20,
+    maxWidth: 200,
+    textAlign: "center",
   },
 });

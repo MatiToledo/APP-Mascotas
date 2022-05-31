@@ -23,7 +23,6 @@ export default function HomeScreen(props) {
   }
 
   function deleteUbication() {
-    dispatch(loadAuth());
     dispatch(removeUbication());
     setUbication(!ubication);
   }
@@ -88,5 +87,6 @@ const styles = StyleSheet.create({
     textAlign: "center",
     maxWidth: 300,
     marginTop: 20,
+    marginBottom: 15,
   },
 });

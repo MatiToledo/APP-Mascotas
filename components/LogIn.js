@@ -17,6 +17,7 @@ export default function LogIn(props) {
   const navigation = props.navigation;
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [loader, setLoader] = useState("loader");
 
   async function handleOnPress() {
     const exist = await checkEmail(email);
@@ -27,10 +28,12 @@ export default function LogIn(props) {
         navigation.navigate("Home");
         Alert.alert("Inicio de sesion realizado con exito");
       } else {
+        setLoader("");
         setPassword("");
         Alert.alert("Contraseña o email incorrecto");
       }
     } else {
+      setLoader("");
       Alert.alert("No existe un usuario con ese email");
     }
   }
@@ -68,7 +71,11 @@ export default function LogIn(props) {
             onChangeText={handlePassword}
           ></TextInput>
         </View>
-        <MyButton onPress={handleOnPress} title="Ingresar"></MyButton>
+        <MyButton
+          onPress={handleOnPress}
+          title="Ingresar"
+          variant={loader}
+        ></MyButton>
       </View>
       <Text style={styles.link} onPress={handleLogUp}>
         Registrarse

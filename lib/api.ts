@@ -55,27 +55,22 @@ export async function modifyData(data, token) {
 }
 
 export async function createPetReport(data, token) {
-  // try {
-  //   const call = await fetch(API_BASE_URL + "/pets/report", {
-  //     method: "POST",
-  //     headers: {
-  //       "content-type": "application/json",
-  //       authorization: "bearer " + token,
-  //       Accept: "application/json",
-  //       "Access-Control-Request-Method": "POST",
-  //     },
-  //     body: JSON.stringify(data),
-  //   });
-  //   const res = await call.text();
-  //   return res;
-  // } catch (error) {
-  //   console.error(error);
-  // }
-  // if (res == true) {
-  //   window.alert("Mascota reportada con exito");
-  // } else {
-  //   window.alert("Error al reportar la mascota");
-  // }
+  try {
+    const call = await fetch(API_BASE_URL + "/pets/report", {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+        authorization: "bearer " + token,
+        Accept: "application/json",
+        "Access-Control-Request-Method": "POST",
+      },
+      body: JSON.stringify(data),
+    });
+    const res = await call.json();
+    return res;
+  } catch (error) {
+    console.error(error);
+  }
 }
 
 export async function myPets(token) {

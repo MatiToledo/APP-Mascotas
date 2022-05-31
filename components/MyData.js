@@ -20,6 +20,8 @@ export default function MyData(props) {
   const [newEmail, setNewEmail] = useState(auth.email);
   const [password, setPassword] = useState("");
   const [confirmpassword, setConfirmpassword] = useState("");
+  const [loader, setLoader] = useState("loader");
+
   function handleUserName(t) {
     setUserName(t);
   }
@@ -50,6 +52,7 @@ export default function MyData(props) {
       props.navigation.navigate("Home");
     } else {
       setPassword(""), setConfirmpassword("");
+      setLoader("");
       Alert.alert("Error al modificar la información");
     }
   }
@@ -100,7 +103,11 @@ export default function MyData(props) {
             onChangeText={handleConfirmPassword}
           ></TextInput>
         </View>
-        <MyButton onPress={handleOnPress} title="Modificar"></MyButton>
+        <MyButton
+          onPress={handleOnPress}
+          variant={loader}
+          title="Modificar"
+        ></MyButton>
       </View>
       <View style={styles.logout}>
         <MyButton
