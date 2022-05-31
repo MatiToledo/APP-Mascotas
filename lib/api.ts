@@ -1,3 +1,5 @@
+import map from "../constants/map";
+
 let API_BASE_URL = "https://desafio-m7.herokuapp.com";
 
 export async function auth(data, callback?) {
@@ -139,9 +141,10 @@ export async function petsAround(lat, lng) {
   const res = await call.json();
   return res;
 }
+
 export async function mapSearch(search) {
   const call = await fetch(
-    `https://maps.googleapis.com/maps/api/geocode/json?address=${search}&key=AIzaSyCFvt1spTbsQZf0rUbkPyl12AoouLK7iDo`
+    `https://maps.googleapis.com/maps/api/geocode/json?address=${search}&key=${map.API_KEY}`
   );
   const res = await call.json();
   return res;

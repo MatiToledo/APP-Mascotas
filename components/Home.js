@@ -7,11 +7,13 @@ import { useDispatch } from "react-redux";
 import { addUbication } from "../store/actions/user.action";
 import { petsAround } from "../lib/api";
 import { loadAuth } from "../store/actions/auth.action";
+import map from "../constants/map";
 
 export default function Home(props) {
   const [loader, setLoader] = useState("loader");
   const dispatch = useDispatch();
 
+  console.log(map.API_KEY);
   useEffect(() => {
     dispatch(loadAuth());
   }, []);

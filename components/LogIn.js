@@ -30,9 +30,11 @@ export default function LogIn(props) {
       } else {
         setLoader("");
         setPassword("");
+        setEmail("");
         Alert.alert("Contraseña o email incorrecto");
       }
     } else {
+      setEmail(""), setPassword("");
       setLoader("");
       Alert.alert("No existe un usuario con ese email");
     }

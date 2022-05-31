@@ -1,13 +1,5 @@
 import { React, useState } from "react";
-import {
-  StyleSheet,
-  Text,
-  TextInput,
-  View,
-  Image,
-  ScrollView,
-  Alert,
-} from "react-native";
+import { StyleSheet, Text, TextInput, View, Alert } from "react-native";
 import MapView, { Marker } from "react-native-maps";
 import { mapSearch } from "../lib/api";
 
@@ -15,8 +7,6 @@ import MyButton from "../ui/Button";
 
 export default function Maps(props) {
   const [location, setLocation] = useState("");
-  // const [lat, setLat] = useState(-31.409593);
-  // const [lng, setLng] = useState(-64.193721);
   const [marker, setMarker] = useState(null);
   const initialRegion = {
     latitude: -31.409593,
@@ -99,7 +89,6 @@ export default function Maps(props) {
 
 const styles = StyleSheet.create({
   search: {
-    // flexDirection: "row",
     flex: 1,
   },
   input: {

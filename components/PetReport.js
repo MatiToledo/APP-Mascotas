@@ -14,7 +14,6 @@ import { useSelector } from "react-redux";
 import { createPetReport } from "../lib/api";
 
 export default function ReportPetComp(props) {
-  console.log(props);
   const navigation = props.navigation;
   const auth = useSelector((state) => state.auth);
   const [petName, setPetName] = useState("");
