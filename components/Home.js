@@ -13,7 +13,6 @@ export default function Home(props) {
   const [loader, setLoader] = useState("loader");
   const dispatch = useDispatch();
 
-  console.log(map.API_KEY);
   useEffect(() => {
     dispatch(loadAuth());
   }, []);

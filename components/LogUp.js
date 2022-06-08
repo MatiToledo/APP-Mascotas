@@ -43,10 +43,16 @@ export default function LogUp(props) {
       if (setAuth == true) {
         Alert.alert("Registro realizado con exito");
         navigation.navigate("Home");
+        console.log({
+          userName,
+          email,
+          password,
+          confirmpassword,
+        });
       } else {
-        Alert.alert("Las contraseñas no coinciden");
         setPassword("");
         setConfirmpassword("");
+        Alert.alert("Las contraseñas no coinciden");
       }
     } else {
       Alert.alert("Ya existe un usuario con ese email");
